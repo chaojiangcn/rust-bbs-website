@@ -7,8 +7,9 @@ import { formatDistanceToNowStrict } from "date-fns";
 import useLoginModal from "@/hooks/useLoginModal";
 import useLike from "@/hooks/useLike";
 
-import Avatar from "../Avatar";
 import PostHeader from "./PostHeaderFollowed";
+import Image from "next/image";
+import ImageGallery from "./ImageGallery";
 
 export interface PostItemProps {
   id: string;
@@ -38,10 +39,9 @@ const PostItem: React.FC<PostItemProps> = (props) => {
   //   [router, data.user.id]
   // );
 
-  const goToPost = useCallback(() => {
-    console.log(999);
-    router.push(`/b/${props.id}`);
-  }, [props.id]);
+  // const goToPost = useCallback(() => {
+  //   router.push(`/posts/${data.id}`);
+  // }, [router, data.id]);
 
   // const onLike = useCallback(
   //   async (ev: any) => {
@@ -68,19 +68,26 @@ const PostItem: React.FC<PostItemProps> = (props) => {
 
   return (
     <div
+      // onClick={goToPost}
       className="
         border-b-[1px] 
         border-grey-100
+        p-5 
         cursor-pointer 
         transition
-        py-5
       "
     >
       <div className="flex flex-col items-start gap-3">
+        <PostHeader
+          nickname={props.authorInfo.nickname}
+          avatar={props.authorInfo.avatar}
+          date={props.date}
+        />
         <div>
-          <div onClick={() => goToPost()} className="mt-1 text-xl font-bold">
-            {props.title}
-          </div>
+          <div className="mt-1">{props.title}</div>
+          {props.images && props.images.length && (
+            <ImageGallery images={props.images} />
+          )}
           <div className="flex flex-row items-center mt-3 gap-10">
             <div
               className="

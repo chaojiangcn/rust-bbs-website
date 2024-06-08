@@ -1,113 +1,66 @@
-import Image from "next/image";
+import Nav from "@/components/nav/Nav";
+import PostFeed from "@/components/posts/PostFeed";
+import PostFeedFollowed from "@/components/posts/PostFeedFollowed";
+import { PostItemProps } from "@/components/posts/PostItem";
 
-export default function Home() {
+export default async function Home() {
+  
+  const postList: PostItemProps[] = [
+    {
+      id: '1',
+      title: "深圳白天“秒变黑”！一天连发七次预警，全市进入暴雨紧急防御状态",
+      images: [
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/f643f8adb526e42155f92874d82cfd21~tplv-tt-cs0:1200:675.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=Ucnkab8slMxuDIQcgVy3guQmgLM%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-6w9my0ksvp/5f72d28df8384b54ae4d27e641bf1350~tplv-tt-cs0:750:1124.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=vKVEweDzA%2F0dIr7PJM349r0jATw%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/3dfa280dbdf84aaa82e397146deb2dca~tplv-tt-cs0:616:480.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716474431&x-signature=OsJiy6OpTar3%2BRzqJ51%2BZeAisPM%3D",
+      ],
+      date: "2022-06-13",
+      authorInfo: {
+        nickname: "北辰 jiujiu",
+        avatar: "https://img0.baidu.com/it/u=4258548311,3664140258&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500",
+      },
+      likeCount: 100,
+      commentCount: 10,
+    },
+    {
+      id: '2',
+      title: "深圳白天“秒变黑”！一天连发七次预警，全市进入暴雨紧急防御状态",
+      images: [
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/f643f8adb526e42155f92874d82cfd21~tplv-tt-cs0:1200:675.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=Ucnkab8slMxuDIQcgVy3guQmgLM%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/f643f8adb526e42155f92874d82cfd21~tplv-tt-cs0:1200:675.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=Ucnkab8slMxuDIQcgVy3guQmgLM%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/f643f8adb526e42155f92874d82cfd21~tplv-tt-cs0:1200:675.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=Ucnkab8slMxuDIQcgVy3guQmgLM%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/f643f8adb526e42155f92874d82cfd21~tplv-tt-cs0:1200:675.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=Ucnkab8slMxuDIQcgVy3guQmgLM%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/f643f8adb526e42155f92874d82cfd21~tplv-tt-cs0:1200:675.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=Ucnkab8slMxuDIQcgVy3guQmgLM%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/f643f8adb526e42155f92874d82cfd21~tplv-tt-cs0:1200:675.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=Ucnkab8slMxuDIQcgVy3guQmgLM%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/f643f8adb526e42155f92874d82cfd21~tplv-tt-cs0:1200:675.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=Ucnkab8slMxuDIQcgVy3guQmgLM%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/f643f8adb526e42155f92874d82cfd21~tplv-tt-cs0:1200:675.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=Ucnkab8slMxuDIQcgVy3guQmgLM%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-6w9my0ksvp/5f72d28df8384b54ae4d27e641bf1350~tplv-tt-cs0:750:1124.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716472877&x-signature=vKVEweDzA%2F0dIr7PJM349r0jATw%3D",
+        "https://p3-sign.toutiaoimg.com/tos-cn-i-qvj2lq49k0/3dfa280dbdf84aaa82e397146deb2dca~tplv-tt-cs0:616:480.jpg?_iz=31826&from=article.headline&lk3s=06827d14&x-expires=1716474431&x-signature=OsJiy6OpTar3%2BRzqJ51%2BZeAisPM%3D",
+      ],
+      date: "2022-06-13",
+      authorInfo: {
+        nickname: "北辰 jiujiu",
+        avatar: "https://img0.baidu.com/it/u=4258548311,3664140258&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500",
+      },
+      likeCount: 100,
+      commentCount: 0,
+    },
+  ];
+
+ 
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="">
+      <Nav />
+      <section className="w-[1060px] flex justify-between px-4 pt-4 mx-auto min-h-[calc(100vh-52px)]">
+        <div className="main w-[658px]">
+          <div className="text-2xl font-bold">热门文章</div>
+          <PostFeed resource={postList}></PostFeed>
         </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+        <div className="recomend w-[318px] ">
+          <h2 className="text-2xl font-bold text-center">推荐关注</h2>
+        </div>
+      </section>
     </main>
   );
 }
