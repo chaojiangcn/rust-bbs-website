@@ -6,6 +6,9 @@
 
 `rust-bbs`是一个使用 Rust 语言搭建的开源社区系统，采用前后端分离技术。Nextjs 作为前端用户界面渲染框架，Rust 提供 API 数据支持。
 
+后端地址 [点这里](https://github.com/chaojiangcn/rust-bbs-server)
+
+
 ### 功能结构
 
 
@@ -15,12 +18,6 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
