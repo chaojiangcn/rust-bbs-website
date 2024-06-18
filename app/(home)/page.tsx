@@ -2,6 +2,13 @@ import Nav from "@/components/nav/Nav";
 import PostFeed from "@/components/posts/PostFeed";
 import PostFeedFollowed from "@/components/posts/PostFeedFollowed";
 import { PostItemProps } from "@/components/posts/PostItem";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: 'home',
+}
+
 
 export default async function Home() {
   
@@ -52,13 +59,13 @@ export default async function Home() {
   return (
     <main className="">
       <Nav />
-      <section className="w-[1060px] flex justify-between px-4 pt-4 mx-auto min-h-[calc(100vh-52px)]">
-        <div className="main w-[658px]">
-          <div className="text-2xl font-bold">热门文章</div>
+      <section className="w-[1190px] flex justify-between px-0 pt-4 mx-auto min-h-[calc(100vh-52px)] relative">
+        <div className="main w-[852px]">
+          <div className="text-xl font-bold">热门文章</div>
           <PostFeed resource={postList}></PostFeed>
         </div>
-        <div className="recomend w-[318px] ">
-          <h2 className="text-2xl font-bold text-center">推荐关注</h2>
+        <div className="recomend w-[318px] h-[300px] ">
+          <h2 className="text-xl font-bold text-center">推荐关注</h2>
         </div>
       </section>
     </main>

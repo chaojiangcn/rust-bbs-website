@@ -78,7 +78,7 @@ const PostItem: React.FC<PostItemProps> = (props) => {
     >
       <div className="flex flex-col items-start gap-3">
         <div>
-          <div onClick={() => goToPost()} className="mt-1 text-xl font-bold">
+          <div onClick={() => goToPost()} className="mt-1 text-lg font-bold">
             {props.title}
           </div>
           <div className="flex flex-row items-center mt-3 gap-10">
