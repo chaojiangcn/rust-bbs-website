@@ -74,3 +74,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+.gradient-text {
+  color: transparent;
+  background: -webkit-linear-gradient(16deg,#4285f4 0,#9b72cb 9%,#d96570 20%,#d96570 24%,#9b72cb 35%,#4285f4 44%,#9b72cb 50%,#d96570 56%,#fff 75%,#fff 100%);
+  background: linear-gradient(74deg,#4285f4 0,#9b72cb 9%,#d96570 20%,#d96570 24%,#9b72cb 35%,#4285f4 44%,#9b72cb 50%,#d96570 56%,#fff 75%,#fff 100%);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
