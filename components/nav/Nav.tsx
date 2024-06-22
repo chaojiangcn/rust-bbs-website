@@ -8,7 +8,7 @@ import { Bell, CirclePlus, Search } from "lucide-react";
 
 import { getNav, changeNav } from "@/store/features/counterSlice";
 import { getAuth, logOut } from "@/store/features/auth";
-import { AppDispatch } from "@/store/store";
+import { AppDispatch } from "@/store/index";
 import Link from "next/link";
 import { SearchInput } from "../ui/search-input";
 import {
