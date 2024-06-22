@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { RootState } from "..";
 
 const initialState = {
   navIndex: 0,

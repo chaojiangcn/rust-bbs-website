@@ -1,48 +1,52 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '..';
 
-type InitialState = {
-  value: AuthState;
-}
+
 // 固定格式
 type AuthState = {
   isAuth: Boolean,
-  username: string,
+  nickname: string,
   uid: string,
-  isModerator: boolean
+  isModerator: boolean,
+  token: string,
+  avatar: string,
 }
 
 // 一个文件存储一个数据，数据可以是任何格式
-const initialState: InitialState = {
-  value: {
+const initialState: AuthState = {
     isAuth: false,
-    username: "",
+    nickname: "",
     uid: "",
-    isModerator: false
-  } as AuthState
-} as InitialState
+    isModerator: false,
+    token: "",
+    avatar: "",
+  }
+
 export const auth = createSlice({
   name: "auth",
-  // 对象初始状态
   initialState: initialState,
   reducers: {
     logOut: () => {// 重置全部值
       return initialState
     },
-    login: (state, action: PayloadAction<string>) => {
+    login: (state, action: PayloadAction<{ token: string, nickname: string, uid: string, avatar: string}>) => {
       return {
-        value: {
           isAuth: true,
-          username: action.payload,
-          uid: "asdasdasdawd",
+          nickname: action.payload.nickname,
+          uid: action.payload.uid,
           isModerator: false,
-        }
+          token: action.payload.token,
+          avatar: action.payload.avatar,
       }
     },
     toggleModerator: (state) => {
-      state.value.isModerator = !state.value.isModerator
+      state.isModerator = !state.isModerator
     }
   }
 })
 
 export const { login, logOut } = auth.actions
 export default auth.reducer
+
+
+export const getAuth = (state: RootState) => state.auth

@@ -35,10 +35,12 @@ const PostFeed: React.FC<PostFeedProps> = ({ userId, resource }) => {
             key={post.id}
             id={post.id}
             title={post.title}
+            introduction={post.introduction}
             date={post.date}
             authorInfo={post.authorInfo}
             likeCount={post.likeCount}
             commentCount={post.commentCount}
+            images={post.images}
           />
         )}
       </List>
