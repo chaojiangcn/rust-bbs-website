@@ -16,20 +16,20 @@ interface PostFeedProps {
 const PostFeed: React.FC<PostFeedProps> = ({ userId, resource }) => {
   const [data, setData] = useState(resource);
 
-  const fetchData = async () => {
-    const list = await post_list({
-      page: 1,
-      size: 10,
-    });
-    setData(prev => [...prev, ...list.post]);
-  }
-  useEffect(() => {
-    fetchData()
-  }, []);
+  // const fetchData = async () => {
+  //   const { data } = await post_list({
+  //     page: 1,
+  //     size: 10,
+  //   });
+  //   setData((prev) => [...prev, ...data.list]);
+  // };
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="">
-      <List data={data} itemKey="id">
+      <List data={resource} itemKey="id">
         {(post: PostItemProps, index) => (
           <PostItem
             key={post.id}
