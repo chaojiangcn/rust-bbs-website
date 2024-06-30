@@ -3,7 +3,7 @@ import axios from 'axios';
 
   
 const instance = axios.create({  
-  baseURL: process.env.BaseURL, // 如果有的话，设置你的 API 基础 URL  
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL, // 如果有的话，设置你的 API 基础 URL  
   timeout: 5000, // 设置请求超时时间  
   // ... 其他配置  
 });  
