@@ -16,6 +16,13 @@
 
 First, run the development server:
 
+配置本地开发环境
+```bash
+#.env.local
+NEXT_PUBLIC_BASE_URL=http://127.0.0.1:8000
+```
+
+
 ```bash
 npm run dev
 ```
