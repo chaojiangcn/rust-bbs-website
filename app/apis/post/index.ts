@@ -12,7 +12,7 @@ export const post_list: ({ page, size }: PageParams) => Promise<APIResponse<any>
 
 export const post_detail = async (id: string) => {
   try {
-    const res = await axiosInstance.get("/post/detail" + id)
+    const res = await axiosInstance.get("/post/detail/" + id)
     return res.data
   } catch (err) {
     console.error(err)
