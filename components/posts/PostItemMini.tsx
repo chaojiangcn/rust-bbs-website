@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export interface PostItemProps {
   id: string;
@@ -15,7 +16,7 @@ const PostItem: React.FC<PostItemProps> = (props) => {
 
   const goToPost = useCallback(() => {
     router.push(`/b/${props.id}`);
-  }, [props.id]);
+  }, [props.id, router]);
 
   return (
     <div
@@ -43,9 +44,9 @@ const PostItem: React.FC<PostItemProps> = (props) => {
               />
             </div>
             <div className="flex-1 flex flex-col justify-between h-full">
-              <div onClick={() => goToPost()} className="font-sans line-clamp-2 mb-2">
+              <Link  className="font-sans line-clamp-2 mb-2" href={`/b/${props.id}`}>
                 {props.title}
-              </div>
+              </Link>
               <div className="text-xs  text-slate-500">{props.time}</div>
             </div>
           </div>

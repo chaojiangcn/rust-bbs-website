@@ -13,8 +13,8 @@ export default async function Page({ params }: { params: { id: string } }) {
     <main className="">
       <section className="w-full lg:w-[1190px] flex justify-between px-4 lg:px-0 py-8 mx-auto min-h-[calc(100vh-52px)] relative">
         <div className="main flex-1 lg:ml-24 relative">
-          <Sider hasLiked={false} comment_count={0} like_count={100} />
-          <Header title={data.title} nickname={"梅超风"} avatar={""} />
+          <Sider hasLiked={false} comment_count={data.comment_count} like_count={data.like_count}  />
+          <Header title={data.title} author={data.author_info} created_at={data.date} />
           <Content content={data.content} />
           <Comments />
         </div>

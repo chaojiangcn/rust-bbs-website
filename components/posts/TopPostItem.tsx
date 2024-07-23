@@ -1,7 +1,4 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
-import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
+import Link from "next/link";
 
 export interface PostItemProps {
   id: string;
@@ -19,22 +16,17 @@ export interface PostItemProps {
 }
 
 const PostItem: React.FC<PostItemProps> = (props) => {
-  const router = useRouter();
-
-  const goToPost = useCallback(() => {
-    router.push(`/b/${props.id}`);
-  }, [props.id]);
 
   return (
     <div>
       <div className="flex flex-col items-start">
         <div className="flex flex-row items-center py-[10px]">
-          <div
-            onClick={() => goToPost()}
+          <Link
             className="text-base font-bold line-clamp-1"
+            href={`/b/${props.id}`}
           >
-           <span className="mr-3">{props.keyindex + 1}</span> {props.title}
-          </div>
+            <span className="mr-3">{props.keyindex + 1}</span> {props.title}
+          </Link>
         </div>
       </div>
     </div>

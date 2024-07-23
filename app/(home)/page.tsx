@@ -1,5 +1,4 @@
 import PostFeed from "@/components/posts/PostFeed";
-import PostFeedFollowed from "@/components/posts/PostFeedFollowed";
 import { PostItemProps } from "@/components/posts/PostItem";
 import { Metadata } from "next";
 import { post_list } from "../apis/post";
