@@ -1,6 +1,4 @@
-import { APIResponse, PageParams } from "./type"
-import axiosInstance from "./axiosInstance"
-import { AxiosResponse } from "axios"
+import { APIResponse } from "./type"
 import { postRequest } from "./api"
 
 interface FollowAddParams {

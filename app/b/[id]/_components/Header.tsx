@@ -1,5 +1,5 @@
 "use client";
-import { checkFollow, follow, unFollow } from "@/app/apis/follow";
+import { follow, unFollow } from "@/app/apis/follow";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getAuth } from "@/store/features/auth";
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const Header = (props: {
   title: string;
@@ -17,6 +18,7 @@ const Header = (props: {
     user_id: string;
   };
   created_at: string;
+  follow: boolean;
 }) => {
   const { toast } = useToast();
   let time = dayjs(props.created_at).format("YYYY-MM-DD HH:mm:ss");
@@ -24,17 +26,9 @@ const Header = (props: {
 
   const [isFollow, setIsFollow] = useState(false);
 
-  const handleCheckFollow = async () => {
-    try {
-      const res = await checkFollow({
-        following_id: props.author.user_id,
-        follower_id: userInfo.uid || "0",
-      });
-      if (res?.code == 200) {
-        setIsFollow(res.data);
-      }
-    } catch (error) {}
-  };
+  useEffect(() => {
+    setIsFollow(props.follow);
+  }, []);
 
   const handleFollow = async () => {
     if (!isFollow) {
@@ -66,9 +60,6 @@ const Header = (props: {
     }
   };
 
-  useEffect(() => {
-    handleCheckFollow();
-  }, []);
   return (
     <>
       <h1 className="text-3xl font-bold mb-6">{props.title}</h1>
@@ -84,9 +75,11 @@ const Header = (props: {
                 <AvatarFallback>{"CN"}</AvatarFallback>
               </Avatar>
               <div>
-                <div className="text-base font-bold">
-                  {props.author.nickname}
-                </div>
+                <Link href={`/user/${props.author.user_id}`}>
+                  <div className="text-base font-bold">
+                    {props.author.nickname}
+                  </div>
+                </Link>
                 <p className="text-sm text-slate-500">
                   {time}发布中国大陆 {props.author.nickname}
                 </p>

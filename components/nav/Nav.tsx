@@ -164,7 +164,7 @@ const Nav = () => {
                 <DropdownMenuLabel>个人中心</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Link href={"user/" + authInfo.uid}>我的主页</Link>
+                  <Link href={"/user/" + authInfo.uid}>我的主页</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="/settings">设置</Link>

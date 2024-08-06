@@ -11,10 +11,9 @@ export const post_list: ({ page, size }: PageParams) => Promise<APIResponse<any>
   }
 }
 
-export const post_detail = async (id: string, uid?:string ) => {
+export const post_detail = async (id: string, headers:{[key:string]:any} ) => {
   try {
-    
-    const res = await axiosInstance.get(`/post/detail/?id=${id}&uid=${uid}`)
+    const res = await axiosInstance.get(`/post/detail/${id}`,{headers})
     return res.data
   } catch (err) {
     console.error(err)

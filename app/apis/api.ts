@@ -1,6 +1,6 @@
 import Error from 'next/error';
 import axiosInstance from './axiosInstance';
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 
 // 定义响应数据的类型
@@ -11,16 +11,16 @@ interface ApiResponse<T> {
 }
 
 // GET 请求封装
-export const getRequest = async <T, P = {}>(url: string, params?: P): Promise<ApiResponse<T>> => {
+export const getRequest = async <T, P = {}>(url: string, params: P, headers?:{[key:string]:string}): Promise<ApiResponse<T>> => {
   try {
-    const response = await axiosInstance.get<T>(url, { params });
+    const response = await axiosInstance.get<T>(url, { params, headers });
     return {
       data: response.data,
       status: response.status,
       statusText: response.statusText,
     };
   } catch (error: any) {
-    toast.error(error.response?.data.message || 'GET request failed');
+    // toast.error(error.response?.data.message || 'GET request failed');
     // 错误处理
     throw new Error(error.response?.data.message || 'GET request failed');
   }
@@ -36,7 +36,7 @@ export const postRequest = async <T, D = {}>(url: string, data?: D): Promise<Api
       statusText: response.statusText,
     };
   } catch (error: any) {
-    toast.error(error.response?.data.message || 'POST request failed');
+    // toast.error(error.response?.data.message || 'POST request failed');
     // 错误处理
     throw new Error(error.response?.data.message || 'POST request failed');
   }
@@ -51,7 +51,7 @@ export const putRequest = async <T, D = {}>(url: string, data?: D): Promise<ApiR
       statusText: response.statusText,
     };
   } catch (error: any) {
-    toast.error(error.response?.data.message || 'PUT request failed');
+    // toast.error(error.response?.data.message || 'PUT request failed');
     // 错误处理
     throw new Error(error.response?.data.message || 'PUT request failed');
   }
@@ -67,7 +67,7 @@ export const deleteRequest = async <T>(url: string): Promise<ApiResponse<T>> => 
       statusText: response.statusText,
     };
   } catch (error: any) {
-    toast.error(error.response?.data.message || 'DELETE request failed');
+    // toast.error(error.response?.data.message || 'DELETE request failed');
     // 错误处理
     throw new Error(error.response?.data.message || 'DELETE request failed');
   }
