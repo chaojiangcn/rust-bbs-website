@@ -23,7 +23,7 @@ export default function Page() {
   const { toast } = useToast();
 
   const auth = getCookie("auth");
-  const editorRef = useRef<EditorRef>();
+  const editorRef = useRef<EditorRef>(null);
   const router = useRouter();
 
   const submitHandle = async (data: z.infer<typeof FormSchema>) => {
