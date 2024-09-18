@@ -16,12 +16,12 @@ export interface PostItemProps {
   title: string;
   images?: string[];
   date: string;
-  authorInfo: {
+  author_info: {
     nickname: string;
     avatar: string;
   };
-  likeCount: number;
-  commentCount: number;
+  like_count: number;
+  comment_count: number;
 }
 
 const PostItem: React.FC<PostItemProps> = (props) => {
@@ -79,8 +79,8 @@ const PostItem: React.FC<PostItemProps> = (props) => {
     >
       <div className="flex flex-col items-start gap-3">
         <PostHeader
-          nickname={props.authorInfo.nickname}
-          avatar={props.authorInfo.avatar}
+          nickname={props.author_info.nickname}
+          avatar={props.author_info.avatar}
           date={props.date}
         />
         <div>
@@ -102,7 +102,7 @@ const PostItem: React.FC<PostItemProps> = (props) => {
             "
             >
               <AiOutlineMessage size={20} />
-              <p>{props.commentCount || 0}</p>
+              <p>{props.comment_count || 0}</p>
             </div>
             <div
               // onClick={onLike}

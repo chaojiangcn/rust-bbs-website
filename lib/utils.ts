@@ -28,6 +28,6 @@ export function timeAgo(time: string | number | Date): string {
   if (minutes > 0) {
     return minutes === 1 ? '1分钟前' : `${minutes}分钟前`;
   }
-  return seconds === 1 ? '1秒前' : `${seconds}秒前`;
+  return seconds <= 1 ? '1秒前' : `${seconds}秒前`;
 }
 

@@ -22,7 +22,7 @@ const createNoopStorage = () => {
 
 const storage =
   typeof window !== "undefined"
-    ? createWebStorage("local")
+    ? createWebStorage("session")
     : createNoopStorage();
 
 // 本地化数据

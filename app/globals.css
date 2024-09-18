@@ -83,3 +83,17 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* editor */
+.bn-container {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+}
+
+.bn-formatting-toolbar {
+  margin-inline: auto;
+}
+.bn-editor {
+  padding-inline: 0 !important;
+}

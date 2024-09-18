@@ -8,8 +8,6 @@ import useLoginModal from "@/hooks/useLoginModal";
 import useLike from "@/hooks/useLike";
 import Image from "next/image";
 
-import Avatar from "../Avatar";
-import PostHeader from "./PostHeaderFollowed";
 import { timeAgo } from "@/lib/utils";
 
 export interface PostItemProps {
@@ -18,12 +16,12 @@ export interface PostItemProps {
   introduction: string;
   images?: string[];
   date: string;
-  authorInfo: {
+  author_info: {
     nickname: string;
     avatar: string;
   };
-  likeCount: number;
-  commentCount: number;
+  like_count: number;
+  comment_count: number;
 }
 
 const PostItem: React.FC<PostItemProps> = (props) => {
@@ -31,8 +29,10 @@ const PostItem: React.FC<PostItemProps> = (props) => {
   const loginModal = useLoginModal();
 
   const currentUser = {};
+
   const { hasLiked, toggleLike } = useLike({ postId: props.id, userId: "1" });
 
+  // useTimeout(toggleLike, 2000);
   // const goToUser = useCallback(
   //   (ev: any) => {
   //     ev.stopPropagation();
@@ -42,22 +42,21 @@ const PostItem: React.FC<PostItemProps> = (props) => {
   // );
 
   const goToPost = useCallback(() => {
-    console.log(999);
     router.push(`/b/${props.id}`);
   }, [props.id]);
 
-  // const onLike = useCallback(
-  //   async (ev: any) => {
-  //     ev.stopPropagation();
+  const onLike = useCallback(
+    async (ev: any) => {
+      ev.stopPropagation();
 
-  //     if (!currentUser) {
-  //       return loginModal.onOpen();
-  //     }
+      // if (!currentUser) {
+      //   return loginModal.onOpen();
+      // }
 
-  //     toggleLike();
-  //   },
-  //   [loginModal, currentUser, toggleLike]
-  // );
+      toggleLike();
+    },
+    [loginModal, currentUser, toggleLike]
+  );
 
   const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
 
@@ -86,11 +85,11 @@ const PostItem: React.FC<PostItemProps> = (props) => {
               <div>
                 <div
                   onClick={() => goToPost()}
-                  className="mt-1 text-lg font-bold"
+                  className="mt-1 text-lg font-bold line-clamp-1 lg:line-clamp-2"
                 >
                   {props.title}
                 </div>
-                <div className="text-neutral-500 pt-2 font-sans line-clamp-2">
+                <div className="text-neutral-500 pt-2 font-sans line-clamp-1 lg:line-clamp-2">
                   {props.introduction}
                 </div>
               </div>
@@ -104,13 +103,12 @@ const PostItem: React.FC<PostItemProps> = (props) => {
                 src={props.images?.[0] || ""}
                 width={112} // 自定义图片宽度
                 height={100} // 自定义图片高度
-                // layout="responsive" // 响应式布局
                 alt="over Image"
               />
             </div>
           </div>
           <div className="flex flex-row items-center mt-3 gap-5 text-neutral-500  text-sm">
-            <span>{props.authorInfo?.nickname}</span>
+            <span>{props.author_info?.nickname}</span>
             <div
               className="
                 flex 
@@ -124,10 +122,10 @@ const PostItem: React.FC<PostItemProps> = (props) => {
             "
             >
               <AiOutlineMessage size={17} />
-              <p>{props.commentCount || "评论"}</p>
+              <p>{props.comment_count || "评论"}</p>
             </div>
             <div
-              // onClick={onLike}
+              onClick={onLike}
               className="
                 flex 
                 flex-row 
@@ -139,7 +137,7 @@ const PostItem: React.FC<PostItemProps> = (props) => {
             "
             >
               <LikeIcon color={hasLiked ? "red" : ""} size={20} />
-              <p>{props.likeCount || "喜欢"}</p>
+              <p>{props.like_count || "喜欢"}</p>
             </div>
             <div>
               <span>{timeAgo(props.date)}</span>

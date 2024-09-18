@@ -1,5 +1,6 @@
 "use client";
 
+import { setCookie }from 'cookies-next'
 import Image from "next/image";
 import Link from "next/link";
 import { z } from "zod";
@@ -7,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -54,14 +54,11 @@ export default function Lgoin() {
     // ✅ This will be type-safe and validated.
     console.log(values);
     const res = await login(values)
-    console.log(3333, res);
     
     if(res.code === 200) {
       dispatch(authLogin(res.data))
+      setCookie('auth', JSON.stringify(res.data));
       router.push("/");
-      setTimeout(() => {
-        console.log(AuthLogin,9999);
-      }, 1);
     } else {
       toast({
         description: "登录失败，请重新登录",
