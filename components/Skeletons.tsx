@@ -1,8 +1,11 @@
+import { ListSkeleton, TopSkeleton } from "@/app/(home)/_components/Index";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const HomeSkeleton = () => <div>
-  <ResultsSkeleton />
-</div>;
+export const HomeSkeleton = () => (
+  <div>
+    <ResultsSkeleton />
+  </div>
+);
 
 export const ResultCardSkeleton = () => (
   <div className="flex gap-x-3">
@@ -15,12 +18,12 @@ export const ResultCardSkeleton = () => (
 
 export const ResultsSkeleton = () => {
   return (
-    <div>
-      <Skeleton className="h-8 w-[290px] mb-4" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-        {[...Array(4)].map((_, i) => (
-          <ResultCardSkeleton key={i} />
-        ))}
+    <div className="w-full lg:w-[1190px] flex justify-between px-4 lg:px-0 pt-4 mx-auto min-h-[calc(100vh-52px)] relative">
+      <div className="main flex-1">
+        <ListSkeleton />
+      </div>
+      <div className="w-[318px] ml-[50px] hidden lg:block">
+        <TopSkeleton />
       </div>
     </div>
   );

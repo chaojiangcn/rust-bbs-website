@@ -16,6 +16,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "欢迎来到 Rust BBS 社区，项目旨在帮助大家快速了解&入门 rust Web 开发",
   description: "RustBBS项目旨在帮助大家快速了解&入门 rust Web 开发",
+  icons: "./icon.png",
 };
 
 export default function RootLayout({

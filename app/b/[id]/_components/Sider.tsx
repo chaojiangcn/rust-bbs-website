@@ -20,8 +20,6 @@ const Sider = (props: {
   like_count: number;
   favorite_count: number;
 }) => {
-  console.log(props);
-
   const userInfo = useSelector(getAuth);
 
   const [isLike, setIsLike] = useState(false);
@@ -82,7 +80,7 @@ const Sider = (props: {
 
   return (
     <>
-      <div className="hidden lg:flex text-xs w-16 h-full justify-center gap-4 flex-col items-center absolute -left-24 top-0">
+      <div className="hidden lg:flex text-xs w-16 h-[100vh] justify-center gap-4 flex-col items-center absolute -left-24 top-0">
         <div className="flex flex-col justify-center items-center   gap-1  cursor-pointer   transition  hover:text-sky-500">
           <div className="flex flex-row items-center justify-center rounded-full w-12 h-12 bg-slate-100">
             <AiOutlineMessage size={19} />
@@ -140,7 +138,7 @@ const Sider = (props: {
               <AiOutlineHeart size={19} />
             )}
           </div>
-          <p>{props.like_count || "喜欢"}</p>
+          <p>{likeCount || "喜欢"}</p>
         </div>
 
         <div className="flex flex-row justify-center items-center gap-1 cursor-pointer transition hover:text-red-500">
@@ -154,7 +152,7 @@ const Sider = (props: {
               <AiOutlineStar size={19} />
             )}
           </div>
-          <p>{props.like_count || "收藏"}</p>
+          <p>{favCount || "收藏"}</p>
         </div>
       </div>
     </>

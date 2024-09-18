@@ -37,11 +37,14 @@ const Nav = () => {
 
   const logout = () => {
     dispatch(logOut());
-    // router.push("/login");
   };
 
   const onClick = (inx: number) => {
     dispatch(changeNav(inx));
+  };
+
+  const toCreate = () => {
+    router.push("/creation/editor");
   };
 
   const Navs = [
@@ -116,7 +119,11 @@ const Nav = () => {
                     <Bell size={20} />
                     消息
                   </Button>
-                  <Button variant="ghost" className=" text-slate-500 gap-1">
+                  <Button
+                    variant="ghost"
+                    onClick={toCreate}
+                    className=" text-slate-500 gap-1"
+                  >
                     <CirclePlus size={20} />
                     写想法
                   </Button>
@@ -145,12 +152,13 @@ const Nav = () => {
           </Button>
           <Button
             variant="ghost"
+            onClick={toCreate}
             className=" hidden md:flex text-slate-500 gap-1"
           >
             <CirclePlus size={20} />
             写想法
           </Button>
-          {authInfo.isAuth ? (
+          {authInfo.token ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar className="w-[28px] h-[28px] ml-6">

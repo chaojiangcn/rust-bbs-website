@@ -81,7 +81,7 @@ const Header = (props: {
                   </div>
                 </Link>
                 <p className="text-sm text-slate-500">
-                  {time}发布中国大陆 {props.author.nickname}
+                  {time}发布中国大陆
                 </p>
               </div>
             </div>

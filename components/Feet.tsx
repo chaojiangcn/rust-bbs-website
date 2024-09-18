@@ -14,10 +14,10 @@ const Links = [
 ];
 const Foot = () => (
   <>
-    <div className="flex flex-col border-t text-zinc-500 text-xs gap-y-4 py-4">
+    <div className="flex flex-col border-t text-zinc-500 text-xs gap-y-4 py-12 px-20">
       <div className="flex justify-items-center  w-full justify-center  gap-x-2">
         {Links.map((item) => (
-          <a className="" href={item.link} key={item.link}>
+          <a className="" href={item.link} key={item.link} target="_blank">
             {item.label}
           </a>
         ))}

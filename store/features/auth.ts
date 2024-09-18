@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '..';
+import { deleteCookie } from 'cookies-next';
 
 
 // 固定格式
@@ -27,6 +28,7 @@ export const auth = createSlice({
   initialState: initialState,
   reducers: {
     logOut: () => {// 重置全部值
+      deleteCookie("auth")
       return initialState
     },
     login: (state, action: PayloadAction<{ token: string, nickname: string, uid: string, avatar: string }>) => {
