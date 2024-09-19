@@ -42,13 +42,13 @@ const Index = (props: { commentNumber: number; post_id: number }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   async function GetCommentList(params: GetListParams) {
-    let res = await fetch(
+    let res:any = await fetch(
       `/api/comment/list?page=${params.page}&size=${params.size}&post_id=${params.post_id}`,
       { method: "GET" }
     );
     res = await res.json();
 
-    if (res.code === 200) {
+    if (res.code == 200) {
       setCommentList(res.data.list);
     }
   }
