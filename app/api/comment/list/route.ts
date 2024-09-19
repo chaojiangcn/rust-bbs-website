@@ -1,16 +1,13 @@
-import { post_detail } from '@/app/apis/post';
-import { getCookie } from 'cookies-next';
-import { cookies } from 'next/headers';
+import { getCommentList, GetListParams } from '@/app/apis/comment';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
   console.log("request:", request);
 
-  let cookie = getCookie("auth", { cookies });
-
-  console.log(555, cookie, request.cookies);
-
-  let res = await post_detail('16', {})
+  const params = request.nextUrl.searchParams
+  
+  let res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/comment/list?${params}`)
+  res = await res.json()
 
   console.log(666, res);
 

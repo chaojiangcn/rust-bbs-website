@@ -42,8 +42,13 @@ const Index = (props: { commentNumber: number; post_id: number }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   async function GetCommentList(params: GetListParams) {
-    const res = await getCommentList(params);
-    if (res?.code === 200) {
+    let res = await fetch(
+      `/api/comment/list?page=${params.page}&size=${params.size}&post_id=${params.post_id}`,
+      { method: "GET" }
+    );
+    res = await res.json();
+
+    if (res.code === 200) {
       setCommentList(res.data.list);
     }
   }
@@ -59,7 +64,7 @@ const Index = (props: { commentNumber: number; post_id: number }) => {
       size: 50,
       post_id: props.post_id,
     });
-  }, []);
+  }, [props.post_id]);
 
   return (
     <>
@@ -125,8 +130,6 @@ const Index = (props: { commentNumber: number; post_id: number }) => {
       <div>
         {/* <Comment /> */}
         {commentList?.map((item) => {
-          console.log(8888, item);
-
           return (
             <div key={item.id}>
               <Comment
@@ -139,7 +142,7 @@ const Index = (props: { commentNumber: number; post_id: number }) => {
                 is_deleted={item.is_deleted}
                 user_info={item.user_info}
               />
-              <ReplyComment comment_id={item.id} post_id={props.post_id} />
+              {/* <ReplyComment comment_id={item.id} post_id={props.post_id} /> */}
             </div>
           );
         })}
