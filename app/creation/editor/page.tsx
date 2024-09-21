@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import Editor, { EditorRef } from "@/components/editor/editor";
 import { Input } from "@/components/ui/input";
-import { add_post } from "@/app/apis/posts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -28,7 +27,6 @@ export default function Page() {
 
   const submitHandle = async (data: z.infer<typeof FormSchema>) => {
     const document = editorRef.current?.getContent();
-    console.log("content: ", document);
 
     let arr = document?.filter((item) => item.content);
     if (arr?.length == 0)
@@ -38,14 +36,17 @@ export default function Page() {
       return toast({ variant: "destructive", title: "请先登录" });
     }
 
-    const res = await add_post({
-      content: JSON.stringify(document),
-      title: data.title,
-      author_id: JSON.parse(auth).uid,
-      tag_id: 0,
-      cover: data.cover,
+    const query = await fetch("/api/post/add", {
+      method: "POST",
+      body: JSON.stringify({
+        content: JSON.stringify(document),
+        title: data.title,
+        author_id: JSON.parse(auth).uid,
+        tag_id: 0,
+        cover: data.cover,
+      }),
     });
-
+    const res = await query.json();
     if (res?.code == 200) {
       toast({ title: "发布成功" });
       router.push("/");

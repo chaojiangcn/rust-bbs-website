@@ -1,6 +1,7 @@
 "use client";
 import { favorite, unFavorite } from "@/app/apis/favorite";
 import { like, unLike } from "@/app/apis/like";
+import { useToast } from "@/components/ui/use-toast";
 import { getAuth } from "@/store/features/auth";
 import { useEffect, useState } from "react";
 import {
@@ -22,6 +23,8 @@ const Sider = (props: {
 }) => {
   const userInfo = useSelector(getAuth);
 
+  const { toast } = useToast();
+
   const [isLike, setIsLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -35,10 +38,15 @@ const Sider = (props: {
   }, []);
 
   async function likeHandle() {
-    let res = await like({
-      post_id: Number(props.post_id),
-      user_id: Number(userInfo.uid),
+    if (!userInfo.uid) return toast({ title: "请先登录", variant: "destructive" });
+    let query = await fetch("/api/post/like", {
+      method: "POST",
+      body: JSON.stringify({
+        post_id: Number(props.post_id),
+        user_id: Number(userInfo.uid),
+      }),
     });
+    const res = await query.json();
     if (res?.code == 200) {
       setIsLike(true);
       setLikeCount((pre) => pre + 1);
@@ -46,10 +54,15 @@ const Sider = (props: {
   }
 
   async function unLikeHandle() {
-    let res = await unLike({
-      post_id: Number(props.post_id),
-      user_id: Number(userInfo.uid),
+    if (!userInfo.uid) return toast({ title: "请先登录", variant: "destructive" });
+    let query = await fetch("/api/post/unlike", {
+      method: "POST",
+      body: JSON.stringify({
+        post_id: Number(props.post_id),
+        user_id: Number(userInfo.uid),
+      }),
     });
+    const res = await query.json();
     if (res?.code == 200) {
       setIsLike(false);
       setLikeCount((pre) => pre - 1);
@@ -57,10 +70,15 @@ const Sider = (props: {
   }
 
   async function favoriteHandle() {
-    let res = await favorite({
-      post_id: Number(props.post_id),
-      user_id: Number(userInfo.uid),
+    if (!userInfo.uid) return toast({ title: "请先登录", variant: "destructive" });
+    let query = await fetch("/api/post/favorite", {
+      method: "POST",
+      body: JSON.stringify({
+        post_id: Number(props.post_id),
+        user_id: Number(userInfo.uid),
+      }),
     });
+    const res = await query.json();
     if (res?.code == 200) {
       setIsFavorite(true);
       setFavCount((pre) => pre + 1);
@@ -68,10 +86,16 @@ const Sider = (props: {
   }
 
   async function unFavoriteHandle() {
-    let res = await unFavorite({
-      post_id: Number(props.post_id),
-      user_id: Number(userInfo.uid),
+    if (!userInfo.uid) return toast({ title: "请先登录", variant: "destructive" });
+
+    let query = await fetch("/api/post/unfavorite", {
+      method: "POST",
+      body: JSON.stringify({
+        post_id: Number(props.post_id),
+        user_id: Number(userInfo.uid),
+      }),
     });
+    const res = await query.json();
     if (res?.code == 200) {
       setIsFavorite(false);
       setFavCount((pre) => pre - 1);

@@ -14,9 +14,6 @@ const PostFeed: React.FC<PostFeedProps> = async (props) => {
   });
 
   const data = res?.data;
-
-  console.log(9999, data);
-
   if (!data) {
     return <div>Loading...</div>;
   }

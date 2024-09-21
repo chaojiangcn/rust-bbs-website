@@ -1,4 +1,3 @@
-"use server"
 import { APIResponse } from "./type"
 import { deleteRequest, getRequest, postRequest } from "./api"
 

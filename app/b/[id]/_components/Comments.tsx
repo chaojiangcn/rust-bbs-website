@@ -1,10 +1,5 @@
 "use client";
-import {
-  addComment,
-  CommentItem,
-  getCommentList,
-  GetListParams,
-} from "@/app/apis/comment";
+import { addComment, CommentItem, GetListParams } from "@/app/apis/comment";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -42,7 +37,7 @@ const Index = (props: { commentNumber: number; post_id: number }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   async function GetCommentList(params: GetListParams) {
-    let res:any = await fetch(
+    let res: any = await fetch(
       `/api/comment/list?page=${params.page}&size=${params.size}&post_id=${params.post_id}`,
       { method: "GET" }
     );
@@ -53,7 +48,6 @@ const Index = (props: { commentNumber: number; post_id: number }) => {
     }
   }
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value);
     setInputDisable(e.target.value.length === 0);
     setMessage(e.target.value);
   };
@@ -89,12 +83,16 @@ const Index = (props: { commentNumber: number; post_id: number }) => {
             <Button
               disabled={inputDisable}
               onClick={async () => {
-                const res = await addComment({
-                  post_id: props.post_id,
-                  user_id: auth.uid,
-                  content: message,
+                const res = await fetch("/api/comment/add", {
+                  method: "POST",
+                  body: JSON.stringify({
+                    post_id: props.post_id,
+                    user_id: auth.uid,
+                    content: message,
+                  }),
                 });
-                if (res?.code === 200) {
+                const data = await res.json();
+                if (data.code == 200) {
                   setInputDisable(true);
                   if (textAreaRef.current) {
                     textAreaRef.current.value = "";
@@ -142,7 +140,7 @@ const Index = (props: { commentNumber: number; post_id: number }) => {
                 is_deleted={item.is_deleted}
                 user_info={item.user_info}
               />
-              {/* <ReplyComment comment_id={item.id} post_id={props.post_id} /> */}
+              <ReplyComment comment_id={item.id} post_id={props.post_id} />
             </div>
           );
         })}
@@ -183,7 +181,11 @@ const ReplyComment = (porps: { post_id: number; comment_id: number }) => {
   const [replyList, setReplyCommentList] = useState<CommentItem[]>();
 
   async function GetCommentList(params: GetListParams) {
-    const res = await getCommentList(params);
+    let res: any = await fetch(
+      `/api/comment/list?page=${params.page}&size=${params.size}&post_id=${params.post_id}&parent_comment_id=${params.parent_comment_id}`,
+      { method: "GET" }
+    );
+    res = await res.json();
     if (res?.code === 200) {
       setReplyCommentList(res.data.list);
     }
@@ -196,7 +198,7 @@ const ReplyComment = (porps: { post_id: number; comment_id: number }) => {
       size: 10,
       parent_comment_id: porps.comment_id,
     });
-  }, []);
+  }, [porps.comment_id, porps.post_id]);
 
   return (
     <>

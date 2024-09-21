@@ -1,6 +1,6 @@
 "use client";
 
-import { setCookie }from 'cookies-next'
+import { setCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
 import { z } from "zod";
@@ -17,12 +17,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { login } from "../apis/user";
 import { useToast } from "@/components/ui/use-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { login as authLogin, getAuth } from "@/store/features/auth";
 import { useRouter } from "next/navigation";
-
 
 const formSchema = z.object({
   email: z.string().email({
@@ -34,7 +32,7 @@ const formSchema = z.object({
 });
 
 export default function Lgoin() {
-  const { toast } = useToast()
+  const { toast } = useToast();
   const AuthLogin = useSelector(getAuth);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -53,17 +51,20 @@ export default function Lgoin() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
-    const res = await login(values)
-    
-    if(res.code === 200) {
-      dispatch(authLogin(res.data))
-      setCookie('auth', JSON.stringify(res.data));
+    const query = await fetch("/api/user/login", {
+      method: "POST",
+      body: JSON.stringify(values),
+    });
+    const res = await query.json();
+    if (res.code === 200) {
+      dispatch(authLogin(res.data));
+      setCookie("auth", JSON.stringify(res.data));
       router.push("/");
     } else {
       toast({
         description: "登录失败，请重新登录",
         variant: "destructive",
-      })
+      });
     }
   }
 
