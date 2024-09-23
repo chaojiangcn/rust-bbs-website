@@ -10,7 +10,7 @@ export const metadata: Metadata = {};
 export default async function Home() {
   const postList: PostItemProps[] = [];
 
-  const query = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list?page=1&size=10`, { method: "GET" });
+  const query = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list?page=1&size=10`, { method: "GET", cache: "no-store" });
   const res = await query.json();
   if (res && res.data && res.data.list) {
     postList.push(...res.data.list);
