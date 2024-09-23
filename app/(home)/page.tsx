@@ -1,7 +1,6 @@
 import PostFeed from "@/components/posts/PostFeed";
 import { PostItemProps } from "@/components/posts/PostItem";
 import { Metadata } from "next";
-import { post_list } from "../apis/post";
 import { Suspense } from "react";
 import TopPostFeed from "@/components/posts/TopPostFeed";
 import { TopSkeleton, ListSkeleton } from "./_components/Index";
@@ -11,10 +10,8 @@ export const metadata: Metadata = {};
 export default async function Home() {
   const postList: PostItemProps[] = [];
 
-  const res = await post_list({
-    page: 1,
-    size: 20,
-  });
+  const query = await fetch(`/api/post/list?page=1&size=20`);
+  const res = await query.json();
   if (res && res.data && res.data.list) {
     postList.push(...res.data.list);
   }
