@@ -10,7 +10,7 @@ export const metadata: Metadata = {};
 export default async function Home() {
   const postList: PostItemProps[] = [];
 
-  const query = await fetch(`/api/post/list?page=1&size=20`);
+  const query = await fetch("http://localhost:3000/api/post/list?page=1&size=10", { method: "GET" });
   const res = await query.json();
   if (res && res.data && res.data.list) {
     postList.push(...res.data.list);
