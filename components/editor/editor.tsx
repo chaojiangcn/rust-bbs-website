@@ -1,15 +1,9 @@
 "use client";
 import "@blocknote/core/fonts/inter.css";
-import { FormattingToolbar, useCreateBlockNote } from "@blocknote/react";
+import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
-import {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from "react";
-
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 interface EditorProps {
   // getContent: () => void;
@@ -31,18 +25,12 @@ const Page = forwardRef<EditorRef, EditorProps>((props, ref) => {
       ? JSON.parse(props.initContent)
       : undefined,
   });
-  console.log(666, props);
-
   editor.isEditable = editable;
-
   useImperativeHandle(ref, () => ({
     getContent: () => {
       return editor.document;
     },
   }));
-
-  console.log(editor.isEditable);
-
   // Renders the editor instance using a React component.
   return (
     <BlockNoteView
